@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  flientd:
+    image: vincent119/vflunetd:latest
+    volumes:
+      #- "fluentd_log:/fluentd/log"
+      - "/opt/fluent/fluent.conf:/fluentd/etc/fluent.conf"
+      - "/opt/logs/nginx:/opt/logs/nginx"
+      - "/tmp:/var/log/td-agent"
+    environment:
+      - TZ=Asia/Taipei
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+
+networks:
+  openregsty:
+    driver: bridge
